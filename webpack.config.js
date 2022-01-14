@@ -35,7 +35,7 @@ const config = {
      * to localhost:3000/api/* (where our Express server is running)
      */
     proxy: {
-      '/api/**': {
+      '/articles/**': {
         target: 'http://localhost:3000/',
         secure: false,
       },
@@ -53,10 +53,14 @@ const config = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
+        test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader'
+          // Creates `style` nodes from JS strings
+          "style-loader",
+          // Translates CSS into CommonJS
+          "css-loader",
+          // Compiles Sass to CSS
+          "sass-loader",
         ]
       },
       {
@@ -75,7 +79,7 @@ const config = {
  
   plugins: [
     new HtmlWebpackPlugin({
-      templateContent: ({ htmlWebpackPlugin }) => '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>' + htmlWebpackPlugin.options.title + '</title></head><body><div id=\"app\"></div></body></html>',
+      templateContent: ({ htmlWebpackPlugin }) => '<!DOCTYPE html><html><head><meta charset=\"utf-8\"><title>' + htmlWebpackPlugin.options.title + '</title></head><body><div id=\"root\"></div></body></html>',
       filename: 'index.html',
     })
   ],

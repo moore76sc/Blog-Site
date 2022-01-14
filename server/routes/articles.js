@@ -16,6 +16,6 @@ router.put('/', articleController.updateArticle, (req, res) => {
   return res.status(201).json({updated_article: res.locals.updatedArticle});
 });
 
-router.delete('/', articleController.deleteArticle);
+router.delete('/:id', articleController.deleteArticle);
 
 module.exports = router
